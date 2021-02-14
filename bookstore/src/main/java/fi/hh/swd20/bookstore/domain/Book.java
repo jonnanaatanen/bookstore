@@ -1,30 +1,59 @@
 package fi.hh.swd20.bookstore.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Book {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
 	private String title;
 	private String author;
-	private Long year;
+	private int year;
 	private String isbn;
-	private Long price;
+	private int price;
+	
 	
 	
 	public Book() {
 		super();
+		this.id = null;
 		this.title = null;
 		this.author = null;
-		this.year = 0L;
+		this.year = 0;
 		this.isbn = null;
-		this.price = 0L;
+		this.price = 0;
 	}
 	
-	public Book(String title, String author, Long year, String isbn, Long price) {
+	public Book(String title, String author, int year, String isbn, int price) {
 		super();
 		this.title = title;
 		this.author = author;
 		this.year = year;
 		this.isbn = isbn;
 		this.price = price;
+	}
+	
+	public Book(Long Id, String title, String author, int year, String isbn, int price) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.author = author;
+		this.year = year;
+		this.isbn = isbn;
+		this.price = price;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -43,11 +72,11 @@ public class Book {
 		this.author = author;
 	}
 
-	public Long getYear() {
+	public int getYear() {
 		return year;
 	}
 
-	public void setYear(Long year) {
+	public void setYear(int year) {
 		this.year = year;
 	}
 
@@ -59,19 +88,21 @@ public class Book {
 		this.isbn = isbn;
 	}
 
-	public Long getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(Long price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
 	@Override
 	public String toString() {
-		return "Book [title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn + ", price=" + price
-				+ "]";
+		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn
+				+ ", price=" + price + "]";
 	}
+
+	
 	
 	
 	
