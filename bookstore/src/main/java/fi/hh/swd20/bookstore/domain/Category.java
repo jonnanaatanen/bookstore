@@ -13,8 +13,8 @@ import java.util.List;
 public class Category {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long categoryid;
 	private String name;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
@@ -29,18 +29,18 @@ public class Category {
 	
 	public Category(Long id, String name) {
 		super();
-		this.id = id;
+		this.categoryid = categoryid;
 		this.name = name;
 	}
 
 
-	public Long getId() {
-		return id;
+	public Long getCategoryid() {
+		return categoryid;
 	}
 
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCategoryid(long categoryid) {
+		this.categoryid = categoryid;
 	}
 
 
@@ -52,11 +52,21 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", name=" + name + "]";
+		return "Category [categoryid=" + categoryid + ", name=" + name + "]";
 	}
+
 	
 	
 }

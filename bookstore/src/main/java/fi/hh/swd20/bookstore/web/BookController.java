@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import fi.hh.swd20.bookstore.domain.Book;
 import fi.hh.swd20.bookstore.domain.BookRepository;
-
+import fi.hh.swd20.bookstore.domain.CategoryRepository;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,9 @@ public class BookController {
 
 	@Autowired
 	private BookRepository repository;
+	
+	@Autowired
+	private CategoryRepository categoryrepository;
 	
 	@RequestMapping(value= "/booklist", method = RequestMethod.GET)
 	public String getBooks(Model model) {
@@ -30,6 +33,7 @@ public class BookController {
     @RequestMapping(value = "/addbook")
     public String addBook(Model model){
     	model.addAttribute("book", new Book());
+    	model.addAttribute("categories", categoryrepository.findAll());
         return "addbook";
     }     
     //vastaanottaa kirjalomakkeen tiedot ja tallettaa ne tietokantaan
@@ -47,6 +51,7 @@ public class BookController {
     //kirjan tietojen muokkaus
     @RequestMapping(value = "/edit/{id}", method= RequestMethod.GET)
     public String editBook(@PathVariable(value="id") Long bookId, Model model){
+    	model.addAttribute("categories", categoryrepository.findAll());
     	model.addAttribute("book", repository.findById(bookId));
     	return "editbook";
     }
